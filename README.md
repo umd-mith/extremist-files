@@ -4,8 +4,7 @@ extensive work to document hate groups and extremists as part of their
 website.
 
 In order to make this list a bit more useful in social media research
-this repository collects the data from their website and makes it available
-as JSON and CSV data.
+this repository collects the data from the SPLC  website and makes it 
+available as JSON and CSV data.
 
-We're trying to crowd source the Twitter, Facebook and Website URLs over
-in this Google Sheet.
+We're trying to crowd source the Twitter, Facebook and Website URLs over in [this Google Sheet](https://docs.google.com/spreadsheets/d/1KfTus1Z99QSZX7g3f5z8VWu3jcOgqFkrFpe-Doc4pFI/edit?usp=sharing).

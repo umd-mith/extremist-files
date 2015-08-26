@@ -35,7 +35,7 @@ def groups():
     for url in group_urls():
         doc = get(url)
         name = doc.find('h1').text
-        location = first(doc, '.field-name-field-extremist-location')
+        location = first(doc, '.field-name-field-extremist-location .field-item')
         ideology = first(doc, '.field-name-field-ideology a')
         desc = first(doc, '.field-name-field-long-text p')
         yield {
@@ -76,4 +76,4 @@ def individuals():
         }
 
 json.dump(list(groups()), open('groups.json', 'w'), indent=2)
-json.dump(list(individuals()), open('individuals.json', 'w'), indent=2)
+#json.dump(list(individuals()), open('individuals.json', 'w'), indent=2)
