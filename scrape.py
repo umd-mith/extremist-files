@@ -76,4 +76,4 @@ def individuals():
         }
 
 json.dump(list(groups()), open('groups.json', 'w'), indent=2)
-#json.dump(list(individuals()), open('individuals.json', 'w'), indent=2)
+json.dump(list(individuals()), open('individuals.json', 'w'), indent=2)
