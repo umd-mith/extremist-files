@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+
+<head>
+  <style>
+
+    body {
+      font-family: arial, sans-serif;
+      font-size: 14pt;
+      margin-left: 15%;
+      margin-right: 15%;
+    }
+
+    header {
+      font-size: 28pt;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #sheet {
+      position: relative;
+    } 
+
+    #sheet iframe {
+      width: 100%;
+      height: 800px;
+    }
+
+    #background {
+      content: "";
+      background: url('hate-map.png');
+      opacity: 0.2;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+    }
+
+  </style>
+</head>
+
+<body>
+  <header>SPLC Hate Map URLs</header>
+  <p>
+  The <a href="https://www.splcenter.org/">Southern Poverty Law Center</a>
+  have done brave and extensive work documenting known hate
+  groups and extremists as part of their <a href="https://www.splcenter.org/fighting-hate/extremist-files">Extremist Files</a> and 
+  <a href="https://www.splcenter.org/hate-map">Hate Map</a> websites. 
+  We are trying to identify the social media accounts (Twitter and Facebook)
+  and website URLs for these organizations to help study the impact
+  that these groups are having on the Web.</p>
+
+  <p>
+  If you have a moment please help us by searching for an organization or three 
+  on Twitter, Facebook and in Google and enter in the authoritative URLs if 
+  you can find them. Remember, not all of these organizations will have social 
+  media accounts or even a website.
+  </p>
+
+  <p>The <a href="https://docs.google.com/spreadsheets/d/1o1cd-sBS9PZScJaHCzlAo1XSVz72wvze-v82HOiQa1U/edit#gid=1456234357">spreadsheet</a> was derived from the geo-json that is behind the Hate Map. If you have any questions or comments please user our <a href="https://github.com/edsu/extremist-files-urls">GitHub issue tracker</a>.</p>
+
+  <div id="sheet">
+    <iframe src="https://docs.google.com/spreadsheets/d/1o1cd-sBS9PZScJaHCzlAo1XSVz72wvze-v82HOiQa1U/edit?usp=sharing"></iframe>
+  </div>
+  <div id="background"></div>
+
+</body>
+
+</html>
