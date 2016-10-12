@@ -4,10 +4,7 @@
 
 This program crawls the Extremist Files section of the SPLC website
 and extracts some basic information about people and organizations 
-that are there. It also uses the geojson of their map to pull in 
-additional organizations that may not be present on the SPLC list.
-
-After it has run you should see two sets of files:
+that are there. After it has run you should see two sets of files:
 
     * individuals.json
     * individuals.csv
@@ -15,7 +12,7 @@ After it has run you should see two sets of files:
     * groups.csv
 
 The CSV files are normalized for a collaborative editing exercise and do not
-have all the information present in the JSON files.
+have all the information that is present in the JSON files.
 
 """
 
@@ -33,7 +30,7 @@ http = requests.Session()
 
 def get(url):
     time.sleep(1) # be nice
-    resp = http.get(url, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"})
+    resp = http.get(url, headers={"User-Agent": "extremist-files-urls: https://github.com/edsu/extremist-files-urls"})
     return BeautifulSoup(resp.content, 'html.parser')
 
 def first(element, selector):
@@ -136,33 +133,8 @@ def write_csvs():
             "SPLC": url
         })
  
-    # TODO: move this into a separate function? 
-    map_data = requests.get('https://www.splcenter.org/hate-map.geojson', headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"}).json() 
-    for feature in map_data['features']:
-        props = feature['properties']
-        name = props['name']
-        name_norm = norm(name)
-        if name_norm in seen:
-            continue
-        seen.add(name_norm)
-        url = None
-        if props['group']:
-            m = re.search('href="(.+)">', props['group'])
-            if m:
-                url = m.group(1)
-                if url in seen:
-                    logging.info("already seen %s with %s", name, url)
-                    continue
-                seen.add(url)
-                logging.info("map has %s with url %s", name, url)
-                gw.writerow({
-                    "Name": name,
-                    "SPLC": url
-                })
-
-
 if __name__ == "__main__":
     logging.basicConfig(filename="crawl.log", level=logging.INFO)
-    #json.dump(list(groups()), open('groups.json', 'w'), indent=2)
-    #json.dump(list(individuals()), open('individuals.json', 'w'), indent=2)
+    json.dump(list(groups()), open('groups.json', 'w'), indent=2)
+    json.dump(list(individuals()), open('individuals.json', 'w'), indent=2)
     write_csvs()
