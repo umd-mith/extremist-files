@@ -105,34 +105,21 @@ def norm(name):
     return name.lower().strip()
 
 def write_csvs():
-    seen = set()
-    fieldnames = ['Name', 'Researcher', 'Verified By', 'SPLC', 'Twitter', 'Facebook', 'YouTube', 'Notes']
+    fieldnames = ['Name', 'Researcher', 'Verified By', 'Twitter', 'Facebook', 'YouTube', 'SPLC', 'Notes']
    
-    iw = csv.DictWriter(open('individuals.csv', 'w'), fieldnames=fieldnames)
-    iw.writeheader()
+    w = csv.DictWriter(open('extremist-files.csv', 'w'), fieldnames=fieldnames)
+    w.writeheader()
+    for group in json.load(open('groups.json')):
+        w.writerow({
+            "Name": group['name'],
+            "SPLC": group['url']
+        })
     for person in json.load(open('individuals.json')):
-        name = person['name']
-        name_norm = norm(name)
-        seen.add(name_norm)
-        iw.writerow({
-            "Name": name,
+        w.writerow({
+            "Name": person['name'],
             "SPLC": person['url']
         })
 
-    gw = csv.DictWriter(open('groups.csv', 'w'), fieldnames=fieldnames)
-    gw.writeheader()
-    for group in json.load(open('groups.json')):
-        name = group['name']
-        url = group['url']
-        name_norm = norm(name)
-        if name_norm in seen:
-            continue
-        seen.add(name_norm)
-        gw.writerow({
-            "Name": name,
-            "SPLC": url
-        })
- 
 if __name__ == "__main__":
     logging.basicConfig(filename="crawl.log", level=logging.INFO)
     json.dump(list(groups()), open('groups.json', 'w'), indent=2)

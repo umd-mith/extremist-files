@@ -13,7 +13,8 @@ To run the scraper you will want to:
 2. install [pip] (note: it comes with Python3)
 3. `pip install -r requirements.txt`
 4. `./crawl.py`
-5. look at resulting json and csv files
+5. brew some tea or coffee
+6. look at individuals.json, groups.json and extremist-files.csv
 
 [Python]: https://www.python.org/downloads/
 [Pip]: https://pip.pypa.io/en/stable/
