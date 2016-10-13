@@ -104,7 +104,13 @@ def individuals():
 def norm(name):
     return name.lower().strip()
 
-def write_csvs():
+def map_name():
+    features = requests.get('https://www.splcenter.org/hate-map.geojson').json()['features']
+    seen = set([g['name'].lower() for g in json.load(open('groups.json'))])
+
+
+
+def write_csv():
     fieldnames = ['Name', 'Researcher', 'Verified By', 'Twitter', 'Facebook', 'YouTube', 'SPLC', 'Notes']
    
     w = csv.DictWriter(open('extremist-files.csv', 'w'), fieldnames=fieldnames)
@@ -124,4 +130,4 @@ if __name__ == "__main__":
     logging.basicConfig(filename="crawl.log", level=logging.INFO)
     json.dump(list(groups()), open('groups.json', 'w'), indent=2)
     json.dump(list(individuals()), open('individuals.json', 'w'), indent=2)
-    write_csvs()
+    write_csv()
